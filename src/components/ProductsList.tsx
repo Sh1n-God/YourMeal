@@ -30,13 +30,13 @@ const ProductsList: React.FC<ProductsListProps> = ({
       <Typography variant="h2">{activeCategory}</Typography>
       <Grid container spacing={2}>
         {products.map((product) => (
-          <Grid size={{ xs: 6, sm: 3, md: 3 }} key={product.id}>
+          <Grid size={{ xs: 6, sm: 3, md: 6 }} key={product.id}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                p: 0.5,
-                borderRadius: 1.5,
+                p: { xs: 0.5, md: 1.5 },
+                borderRadius: { xs: 3, md: 4.5 },
                 backgroundColor: "#FFFFFF",
                 cursor: "pointer",
               }}
@@ -50,13 +50,13 @@ const ProductsList: React.FC<ProductsListProps> = ({
                   marginBottom: 10,
                 }}
               />
-              <Typography variant="h3" sx={{ mb: 0.5 }}>
+              <Typography variant="h3" sx={{ mb: { xs: 0.5 } }}>
                 {product.price} ₴
               </Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
+              <Typography variant="body1" sx={{ mb: { xs: 2 } }}>
                 {product.name}
               </Typography>
-              <Typography variant="body1" sx={{ mb: 1 }}>
+              <Typography variant="body1" sx={{ mb: { xs: 1 }, color: "#B1B1B1" }}>
                 {product.weight}
               </Typography>
               <Button
