@@ -1,8 +1,12 @@
-import { Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import burgerHeader from "../assets/burger_header.png";
 import logo from "../assets/LogoHeader.png";
+import burgerHeaderBig from "../assets/burger_header_big.png";
 
 const Header: React.FC = () => {
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <Stack
       //   bgcolor="orange"
@@ -54,7 +58,7 @@ const Header: React.FC = () => {
       <Grid container sx={{ flexDirection: { xs: "column", sm: "row-reverse" }, alignItems: { sm: "center" }, justifyContent: { sm: "center" }, gap: { sm: 1.25 } }} >
         <Grid>
           <Stack alignItems={{ xs: "center", sm: "start" }} mb={2.5}>
-            <Stack alignItems={{ xs: "center", sm: "start" }} mb={2}>
+            <Stack alignItems={{ xs: "center", sm: "start" }} mb={{ xs: 2, sm: 3.25, md: 6.5 }}>
               <Typography variant="h1" sx={{ color: "white" }}>
                 Только самые
               </Typography>
@@ -69,7 +73,7 @@ const Header: React.FC = () => {
         </Grid>
         <Grid>
           <Stack alignItems="center">
-            <img src={burgerHeader} alt="burger" />
+            <img src={isMdUp ? burgerHeaderBig : burgerHeader} alt="burger" />
           </Stack>
         </Grid>
       </Grid>

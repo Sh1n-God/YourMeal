@@ -1,4 +1,4 @@
-import { Typography, Stack, IconButton } from "@mui/material";
+﻿import { Typography, Stack, IconButton } from "@mui/material";
 import Call from "../assets/Call.png";
 import TG from "../assets/Icons/TgIcon.tsx";
 import VK from "../assets/Icons/VkIcon.tsx";
@@ -57,11 +57,16 @@ const Footer: React.FC = () => {
                     </Stack>
                 </Stack>
             </Stack>
-            <Stack>
-                <Typography fontSize={12}>© YouMeal, 2022</Typography>
-                <Typography fontSize={12}>Design: Anastasia Ilina</Typography>
+            <Stack gap={0.5}>
+                <Typography component="p" sx={{ fontSize: "12px !important", lineHeight: "12px" }}>
+                    © YouMeal, 2022
+                </Typography>
+                <Typography component="p" sx={{ fontSize: "12px !important", lineHeight: "12px" }}>
+                    Design: Anastasia Ilina
+                </Typography>
             </Stack>
         </Stack>
     )
 };
 export default Footer;
+

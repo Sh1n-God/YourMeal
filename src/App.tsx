@@ -7,14 +7,14 @@ import '@fontsource/nunito/800.css';
 import '@fontsource/nunito/600.css';
 import '@fontsource/nunito/400.css';
 function App() {
-  const defaultCategoryPath = `/category/${encodeURIComponent(defaultCategorySlug)}`;
+  const defaultCategoryPath = `/${encodeURIComponent(defaultCategorySlug)}`;
 
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to={defaultCategoryPath} replace />} />
-          <Route path="/category/:slug" element={<Layout />} />
+          <Route path="/:slug" element={<Layout />} />
           <Route path="*" element={<Navigate to={defaultCategoryPath} replace />} />
         </Routes>
       </BrowserRouter>

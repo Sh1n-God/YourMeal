@@ -42,18 +42,19 @@ const ProductsList: React.FC<ProductsListProps> = ({
               }}
               onClick={() => openPopup(product)}
             >
-              <img
+              <Box
+                component="img"
                 src={product.image}
                 alt={product.name}
-                style={{
-                  borderRadius: 8,
-                  marginBottom: 10,
+                sx={{
+                  borderRadius: { xs: 2, md: 3 },
+                  mb: { xs: 1.25, md: 2 },
                 }}
               />
-              <Typography variant="h3" sx={{ mb: { xs: 0.5 } }}>
+              <Typography variant="h3" sx={{ mb: { xs: 0.5, md: 1 } }}>
                 {product.price} ₴
               </Typography>
-              <Typography variant="body1" sx={{ mb: { xs: 2 } }}>
+              <Typography variant="body1" sx={{ mb: { xs: 2, md: 3.625 } }}>
                 {product.name}
               </Typography>
               <Typography variant="body1" sx={{ mb: { xs: 1 }, color: "#B1B1B1" }}>

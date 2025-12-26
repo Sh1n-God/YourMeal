@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Dialog, Typography, RadioGroup, FormControlLabel, Radio, Stack, DialogTitle, DialogContent, DialogActions, Button, OutlinedInput, IconButton, useMediaQuery } from "@mui/material"
+import { Dialog, Typography, RadioGroup, FormControlLabel, Radio, Stack, DialogTitle, DialogContent, DialogActions, Button, TextField, IconButton, useMediaQuery, Box } from "@mui/material"
 import { SxProps, Theme, useTheme } from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
+import donut from '../assets/delivery_donut.png';
 import { SubmitHandler, useForm } from "react-hook-form"
 
 
@@ -52,11 +53,6 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
             alert("❌ Не удалось отправить данные.");
         }
     };
-    const errorText = (message: string) => (
-        <Typography variant="body1" color="error" sx={{ "&::before": { display: "inline", content: '"⚠ "' } }}>
-            {message}
-        </Typography>
-    );
 
     return (
         <Dialog
@@ -68,92 +64,152 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                     sx: [
                         {
                             boxSizing: 'border-box',
-                            height: '100dvh',
-                            borderRadius: 0,
-                            py: 4,
-                            px: 1.25,
+                            height: { xs: '100dvh', sm: 'auto' },
+                            borderRadius: { xs: 0, sm: 6 },
+                            p: { xs: "32px 10px", sm: "20px 16px 29px", md: 0 },
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
+                            m: 0,
+                            width: { xs: "100%", sm: "calc(100% - 2*(100vw / 6.3))" },
+                            maxHeight: '100dvh',
+                            maxWidth: '684px',
+                            minHeight: { sm: "345px", md: "435px" }
                         },
                         paperSx,
                     ] as SxProps<Theme>,
                 },
             }}
         >
-            <DialogTitle sx={{ p: 0, mb: 2.25 }}>
-                <Typography variant="h3">Доставка</Typography>
-                <IconButton
-                    onClick={onClose}
+            <Box sx={{ display: { xs: 'block', md: 'flex' }, flex: 1, minHeight: { md: '100%' } }}>
+                <Box
                     sx={{
-                        position: "absolute",
-                        right: 10,
-                        top: 10,
-                        p: 0,
+                        display: { xs: 'none', md: 'block' },
+                        width: { md: '50%' },
+                        flex: { md: '0 0 50%' },
+                        bgcolor: '#FFAB08',
+                        p: { md: '65px 21px 65px 19px' },
+                        boxSizing: 'border-box',
                     }}
                 >
-                    <CloseIcon />
-                </IconButton>
-            </DialogTitle>
-            <DialogContent sx={{ p: 0, flex: 1, overflow: 'hidden' }}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack sx={{ gap: 1, mb: 3 }}>
-                        <OutlinedInput
-                            {...register("name", { required: true, pattern: /^[А-Яа-я ]+$/i })}
-                            placeholder="Ваше имя"
-                            error={Boolean(errors?.name)}
-                        />
-                        {errors?.name?.type === "required" && errorText("Это обязательное поле")}
-                        {errors?.name?.type === "pattern" && (
-                            errorText('Недопустимые символы')
-                        )}
-                        <OutlinedInput
-                            {...register("phone", { required: true, pattern: /^\+?380\d{9}$/ })}
-                            placeholder="Телефон"
-                            error={Boolean(errors?.phone)}
-                        />
-                        {errors?.phone?.type === "required" && errorText("Это обязательное поле")}
-                        {errors?.phone?.type === "pattern" && (
-                            errorText('Введите номер в формате +380XXXXXXXXX')
-                        )}
-                    </Stack>
-                    <RadioGroup value={method} onChange={onChangeRadio} sx={{ gap: 1, mb: 3 }}>
-                        <FormControlLabel value="pickup" control={<Radio />} label="Самовывоз" />
-                        <FormControlLabel value="delivery" control={<Radio />} label="Доставка" />
-                    </RadioGroup>
-                    {method === 'delivery' && (
-                        <Stack direction='column' spacing={1}>
-                            <OutlinedInput
-                                {...register("adress", { required: true })}
-                                placeholder="Улица, дом, квартира"
-                                error={Boolean(errors?.adress)}
-                            />
-                            {errors?.adress?.type === "required" && errorText("Это обязательное поле")}
-                            <Stack direction="row" spacing={1}>
-                                <OutlinedInput
-                                    {...register("floor", { required: true, min: 1, maxLength: 3 })}
-                                    placeholder="Этаж"
-                                    error={Boolean(errors?.floor)}
-                                />
-                                {errors?.floor?.type === "required" && errorText("Это обязательное поле")}
-                                {errors?.floor?.type === "min" && errorText("Этаж должен быть не менее 1")}
-                                {errors?.floor?.type === "maxLength" && errorText("Этаж не должен превышать 3 цифры")}
-                                <OutlinedInput
-                                    {...register("flatNum", { required: true, min: 1, maxLength: 4 })}
-                                    placeholder="Домофон"
-                                    error={Boolean(errors?.flatNum)}
-                                />
-                                {errors?.flatNum?.type === "required" && errorText("Это обязательное поле")}
-                                {errors?.flatNum?.type === "min" && errorText("Номер должен быть не менее 1")}
-                                {errors?.flatNum?.type === "maxLength" && errorText("Номер не должен превышать 4 цифры")}
-                            </Stack>
-                        </Stack>
-                    )}
-                </form>
-            </DialogContent>
-            <DialogActions sx={{ p: 0 }}>
-                <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)} fullWidth >Оформить</Button>
-            </DialogActions>
+                    <img src={donut} alt="donught" />
+                </Box>
+                <Box
+                    sx={{
+                        width: { xs: '100%', md: '50%' },
+                        flex: { md: '0 0 50%' },
+                        display: 'flex',
+                        flexDirection: 'column',
+                        minHeight: { md: '100%' },
+                        p: 0,
+                        minWidth: 0,
+                    }}
+                >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: { md: '100%' }, p: { xs: 0, md: "44px 24px 24px" }, boxSizing: 'border-box' }}>
+                        <DialogTitle sx={{ p: 0, mb: { xs: 2.25, md: 2 } }}>
+                            <Typography variant="h3">Доставка</Typography>
+                            <IconButton
+                                onClick={onClose}
+                                sx={{
+                                    position: "absolute",
+                                    right: { xs: 10, sm: 16 },
+                                    top: { xs: 10, sm: 16 },
+                                    p: 0,
+                                }}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        </DialogTitle>
+                        <DialogContent sx={{ p: 0, flex: 1, overflow: 'auto', mb: { sm: 3, md: 4 }, maxWidth: { xs: "100vw", sm: '300px', md: '100%' } }}>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <Stack sx={{ gap: 1, mb: { xs: 3, sm: 2 } }}>
+                                    <TextField
+                                        {...register("name", { required: true, pattern: /^[A-Za-z ]+$/i })}
+                                        label={
+                                            errors?.name?.type === "pattern"
+                                                ? "Invalid characters"
+                                                : errors?.name
+                                                    ? "Required field"
+                                                    : "Name"
+                                        }
+                                        placeholder="Name"
+                                        error={Boolean(errors?.name)}
+                                        variant="outlined"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        {...register("phone", { required: true, pattern: /^\+?380\d{9}$/ })}
+                                        label={
+                                            errors?.phone?.type === "pattern"
+                                                ? "Format +380XXXXXXXXX"
+                                                : errors?.phone
+                                                    ? "Required field"
+                                                    : "Phone"
+                                        }
+                                        placeholder="Phone"
+                                        error={Boolean(errors?.phone)}
+                                        variant="outlined"
+                                        fullWidth
+                                    />
+                                </Stack>
+                                <RadioGroup value={method} onChange={onChangeRadio} sx={{ gap: { sm: 1, md: 1.5 }, mb: { xs: 3, sm: 2 } }}>
+                                    <FormControlLabel value="pickup" control={<Radio />} label="Pickup" />
+                                    <FormControlLabel value="delivery" control={<Radio />} label="Delivery" />
+                                </RadioGroup>
+                                {method === 'delivery' && (
+                                    <Stack direction='column' spacing={1}>
+                                        <TextField
+                                            {...register("adress", { required: true })}
+                                            label={errors?.adress ? "Required field" : "Street, house, apartment"}
+                                            placeholder="Street, house, apartment"
+                                            error={Boolean(errors?.adress)}
+                                            variant="outlined"
+                                            fullWidth
+                                        />
+                                        <Stack direction="row" spacing={{ xs: 1, sm: 0.5, md: 1 }}>
+                                            <TextField
+                                                {...register("floor", { required: true, min: 1, maxLength: 3 })}
+                                                label={
+                                                    errors?.floor?.type === "min"
+                                                        ? "Min 1"
+                                                        : errors?.floor?.type === "maxLength"
+                                                            ? "Max 3 digits"
+                                                            : errors?.floor
+                                                                ? "Required field"
+                                                                : "Floor"
+                                                }
+                                                placeholder="Floor"
+                                                error={Boolean(errors?.floor)}
+                                                variant="outlined"
+                                                sx={{ flex: 1 }}
+                                            />
+                                            <TextField
+                                                {...register("flatNum", { required: true, min: 1, maxLength: 4 })}
+                                                label={
+                                                    errors?.flatNum?.type === "min"
+                                                        ? "Min 1"
+                                                        : errors?.flatNum?.type === "maxLength"
+                                                            ? "Max 4 digits"
+                                                            : errors?.flatNum
+                                                                ? "Required field"
+                                                                : "Intercom"
+                                                }
+                                                placeholder="Intercom"
+                                                error={Boolean(errors?.flatNum)}
+                                                variant="outlined"
+                                                sx={{ flex: 1 }}
+                                            />
+                                        </Stack>
+                                    </Stack>
+                                )}
+                            </form>
+                        </DialogContent>
+                        <DialogActions sx={{ p: 0, maxWidth: { xs: "100vw", sm: '300px', md: '100%' } }}>
+                            <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)} fullWidth >Оформить</Button>
+                        </DialogActions>
+                    </Box>
+                </Box>
+            </Box>
         </Dialog>
     )
 }

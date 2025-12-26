@@ -16,24 +16,34 @@ const Categories: React.FC<CategoriesProps> = ({ activeCategory }) => {
   const navigate = useNavigate();
   const handleChange = (_: React.MouseEvent<HTMLElement>, value: string | null) => {
     if (!value) return;
-    navigate(`/category/${encodeURIComponent(value)}`);
+    navigate(`/${encodeURIComponent(value)}`);
   };
+
   return (
     <Box
       sx={{
         overflowX: "auto",
         width: "100vw",
-        scrollbarWidth: "none", // Firefox
-        msOverflowStyle: "none", // IE и Edge
-        "&::-webkit-scrollbar": { display: "none" }, // Chrome, Safari
-        lineHeight: "0"
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        "&::-webkit-scrollbar": { display: "none" },
+        lineHeight: "0",
       }}
     >
       <ToggleButtonGroup
         value={activeCategory}
         exclusive
         onChange={handleChange}
-        sx={{ gap: 1 }}
+        sx={{
+          gap: { xs: "8px", sm: "12px", md: "24px" },
+          pr: 0,
+          "&::after": {
+            content: '""',
+            display: "block",
+            flexShrink: 0,
+            minWidth: { xs: 10, sm: 64, md: 32 },
+          },
+        }}
       >
         {categories.map((category) => (
           <ToggleButton

@@ -27,11 +27,11 @@ const BasketItem: React.FC<CardItemProps> = ({ product, quantity }) => {
         sx={{ width: 64, height: 52, objectFit: "cover", borderRadius: 2 }}
       />
       <Stack flexGrow={1} mx={0.75}>
-        <Typography variant="body1">{product.name}</Typography>
-        <Typography variant="body1" color="text.secondary">
+        <Typography component="p" sx={{ fontSize: "12px !important" }}>{product.name}</Typography>
+        <Typography component="p" sx={{ fontSize: "12px !important" }} color="#B1B1B1">
           {product.weight}
         </Typography>
-        <Typography variant="body1" sx={{ mt: 0.625 }}>
+        <Typography component="p" sx={{ fontSize: "12px !important", lineHeight: "12px", mt: 0.75 }}>
           {product.price} ₴
         </Typography>
       </Stack>

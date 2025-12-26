@@ -121,6 +121,12 @@ const theme = createTheme({
         root: {
           borderRadius: '8px',
           padding: '9px 0',
+          '@media (min-width:900px)': {
+            padding: '12px 0',
+            fontSize: "16px",
+            lineHeight: "16px",
+            borderRadius: "12px"
+          },
           justifyContent: 'center',
           alignItems: 'center',
           textTransform: 'none',

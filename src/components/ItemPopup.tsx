@@ -23,7 +23,6 @@ interface ItemPopupProps {
 }
 
 const StyledImage = styled('img')({
-    width: '100%',
     objectFit: 'cover',
     borderRadius: '16px'
 });
@@ -60,13 +59,15 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
                         {
                             boxSizing: 'border-box',
                             height: { xs: '100dvh', sm: 'auto' },
-                            borderRadius: { xs: 0, sm: 3 },
+                            borderRadius: { xs: 0, sm: 6 },
                             p: { xs: "32px 10px", sm: "16px 16px 24px", md: "24px 24px 36px" },
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
                             m: 0,
-                            mx: { xs: 0, sm: "calc(100vw / 6)" }
+                            width: { xs: "100%", sm: "calc(100% - 2*(100vw / 6.3))" },
+                            maxHeight: '100dvh',
+                            maxWidth: '684px',
                         },
                         paperSx,
                     ] as SxProps<Theme>,
@@ -77,7 +78,7 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
                 <Typography variant="h2">{product ? product.name : 'Товар'}</Typography>
                 <IconButton
                     onClick={handleClose}
-                    sx={{ position: 'absolute', right: 10, top: 10, p: 0 }}
+                    sx={{ position: 'absolute', right: { xs: 10, sm: 16, md: 24 }, top: { xs: 10, sm: 16, md: 24 }, p: 0 }}
                     aria-label="Закрыть"
                 >
                     <CloseIcon />
@@ -86,7 +87,11 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
             <DialogContent sx={{ p: 0, flex: 1, overflow: 'auto', mb: { sm: 3, md: 5 } }}>
                 {product ? (
                     <Stack direction={{ xs: "column", sm: "row" }} gap={{ xs: 2, sm: 1, md: 2 }}>
-                        <StyledImage src={product.image} alt={product.name} />
+                        <StyledImage
+                            src={product.image}
+                            alt={product.name}
+                            sx={{ width: { xs: '100%', sm: '100%' }, maxWidth: { sm: 'calc(100% - 50px)' } }}
+                        />
                         <Box>
 
                             {product.description && (
@@ -120,8 +125,8 @@ const ItemPopup: React.FC<ItemPopupProps> = ({ open, onClose, product, paperSx }
                     <Typography variant="body1">Товар не найден</Typography>
                 )}
             </DialogContent>
-            <Stack>
-                <DialogActions sx={{ p: 0, mb: 2 }} >
+            <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems={{ xs: "inherit", sm: 'center' }}>
+                <DialogActions sx={{ p: 0, mb: { xs: 2, sm: 0 }, maxWidth: { xs: "300px", md: "376px" }, flexGrow: 1 }} >
                     <Button
                         variant="contained"
                         color="primary"

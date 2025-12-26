@@ -43,7 +43,7 @@ const Layout: React.FC = () => {
   }, [activeCategory]);
   const activeSlug = slug ?? defaultCategorySlug;
   if (!getCategoryBySlug(activeSlug)) {
-    return <Navigate to={`/category/${encodeURIComponent(defaultCategorySlug)}`} replace />;
+    return <Navigate to={`/${encodeURIComponent(defaultCategorySlug)}`} replace />;
   }
   return (
     <Stack
@@ -58,16 +58,16 @@ const Layout: React.FC = () => {
       <Box component="main" flexGrow={1}
         sx={{
           position: "relative",
-          mt: { xs: 3.75 },
-          px: { xs: 1.25, sm: 8 },
+          mt: { xs: 3.75, md: 5 },
+          px: { xs: 1.25, sm: 8, md: 4 },
           boxSizing: "border-box",
           width: "100vw",
         }}>
         <Categories activeCategory={activeSlug} />
         <Stack
-          direction="column"
+          direction={{ xs: "column", md: "row" }}
           spacing={3.75}
-          mt={{ xs: 3.75 }}
+          mt={{ xs: 3.75, md: 6.25 }}
         >
           <Basket openDelivery={onOpenDelivery} />
           <ProductsList products={filteredProducts} activeCategory={activeCategory} />
@@ -82,4 +82,3 @@ const Layout: React.FC = () => {
 };
 
 export default Layout;
-

@@ -13,8 +13,19 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
   const totalCount = useProductStore((s) => s.cart.reduce((t, i) => t + i.quantity, 0));
   const totalPrice = useProductStore((s) => s.cart.reduce((t, i) => t + i.product.price * i.quantity, 0));
   const [showCheckout] = useState(false);
-  const handleToggle = () => setExpanded((v) => !v);
   const handleClose = () => setExpanded(false);
+  const isEmpty = cart.length === 0;
+  const handleToggle = () => {
+    if (isEmpty) return;
+    setExpanded((v) => !v);
+  };
+  const emptyMessage = (
+    <Box sx={{ pt: 2 }}>
+      <Typography variant="body1" color="text.secondary">
+        Тут пока пусто :(
+      </Typography>
+    </Box>
+  );
 
   useEffect(() => {
     if (showCheckout) {
@@ -29,10 +40,12 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
         position: "relative",
         bgcolor: "#fff",
         borderRadius: 3,
-        py: 2,
-        px: 1.25,
-        maxWidth: expanded ? "300px" : "145px",
+        py: { xs: 2, md: 3 },
+        px: { xs: 1.25, md: 2 },
+        minWidth: { xs: "300px", sm: expanded ? "300px" : "145px", md: "300px" },
+        maxWidth: { xs: "100%", sm: expanded ? "300px" : "145px", md: "300px" },
         boxSizing: "border-box",
+        alignSelf: { xs: "stretch", md: "flex-start" },
       }}
     >
       <Box
@@ -41,7 +54,7 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
           display: 'flex',
           justifyContent: "space-between",
           alignItems: "center",
-          cursor: "pointer",
+          cursor: isEmpty ? "default" : "pointer",
           position: "relative",
           zIndex: 20,
         }}
@@ -53,24 +66,16 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
             alignItems: "center",
             bgcolor: "#F2F2F3",
             borderRadius: 1.5,
-            px: 1.625,
+            px: { xs: 1.625, md: 2 },
             py: 0.125,
           }}
         >
           <Typography variant="subtitle2">{totalCount}</Typography>
         </Box>
       </Box>
+      {!expanded && isEmpty && emptyMessage}
       {expanded && (
         <>
-          <Box
-            onClick={handleClose}
-            sx={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 9,
-              background: 'transparent',
-            }}
-          />
           <Stack
             sx={{
               position: "absolute",
@@ -79,24 +84,20 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
               right: 0,
               zIndex: 10,
               bgcolor: "#fff",
-              borderRadius: 2,
+              borderRadius: 3,
               overflow: "hidden",
               maxHeight: "70vh",
               display: "flex",
               flexDirection: "column",
               boxShadow: "0 0 10px rgba(0,0,0,0.16)",
-              paddingTop: 5,
+              paddingTop: { xs: 5, md: 7.5 },
             }}
           >
             <Box sx={{ flex: 1, overflow: "auto", px: 1.25 }}>
-              {cart.length === 0 ? (
-                <Box sx={{ pt: 2, pb: 1 }}>
-                  <Typography variant="body1" color="text.secondary">
-                    Тут пока пусто :(
-                  </Typography>
-                </Box>
+              {isEmpty ? (
+                emptyMessage
               ) : (
-                <Stack spacing={1.375} divider={<Divider />} sx={{ borderBottom: "1px solid #e0e0e0", borderTop: "1px solid #e0e0e0", py: 1.375 }}>
+                <Stack spacing={{ xs: 1.375, md: 2 }} divider={<Divider />} sx={{ borderBottom: "1px solid #e0e0e0", borderTop: "1px solid #e0e0e0", py: { xs: 1.375, md: 2 } }}>
                   {cart.map((item) => (
                     <BasketItem
                       key={item.product.id}
@@ -110,7 +111,7 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
             {cart.length > 0 && (
               <Box
                 sx={{
-                  p: "13px 10px 16px",
+                  p: { xs: "13px 10px 16px", md: "16px 16px 24px" },
                   bgcolor: "#fff",
                 }}
               >
@@ -119,7 +120,7 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
                     <Typography variant="body1">Итого</Typography>
                     <Typography variant="body1">{totalPrice} ₴</Typography>
                   </Stack>
-                  <Button variant="contained" color="primary" sx={{ mt: 2.375, mb: 1 }} fullWidth onClick={openDelivery}>
+                  <Button variant="contained" color="primary" sx={{ mt: { xs: 2.375, md: 3 }, mb: 1 }} fullWidth onClick={openDelivery}>
                     Оформить заказ
                   </Button>
                   <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -129,7 +130,7 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
                     </Stack>
                     <Typography
                       variant="subtitle2"
-                      sx={{ cursor: "pointer", color: "text.secondary" }}
+                      sx={{ cursor: "pointer", color: "#B1B1B1" }}
                       onClick={handleClose}
                     >
                       Свернуть
