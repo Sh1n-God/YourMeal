@@ -106,7 +106,7 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                     }}
                 >
                     <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: { md: '100%' }, p: { xs: 0, md: "44px 24px 24px" }, boxSizing: 'border-box' }}>
-                        <DialogTitle sx={{ p: 0, mb: { xs: 2.25, md: 2 } }}>
+                        <DialogTitle sx={{ p: 0, mb: { xs: 2.25, md: 0 } }}>
                             <Typography variant="h3">Доставка</Typography>
                             <IconButton
                                 onClick={onClose}
@@ -120,19 +120,19 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                                 <CloseIcon />
                             </IconButton>
                         </DialogTitle>
-                        <DialogContent sx={{ p: 0, flex: 1, overflow: 'auto', mb: { sm: 3, md: 4 }, maxWidth: { xs: "100vw", sm: '300px', md: '100%' } }}>
+                        <DialogContent sx={{ p: 0, pt: { md: "16px !important" }, flex: 1, overflow: 'auto', mb: { sm: 3, md: 4 }, maxWidth: { xs: "100vw", sm: '300px', md: '100%' } }}>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <Stack sx={{ gap: 1, mb: { xs: 3, sm: 2 } }}>
                                     <TextField
                                         {...register("name", { required: true, pattern: /^[A-Za-z ]+$/i })}
                                         label={
                                             errors?.name?.type === "pattern"
-                                                ? "Invalid characters"
+                                                ? "Недопустимые символы"
                                                 : errors?.name
-                                                    ? "Required field"
-                                                    : "Name"
+                                                    ? "Обязательное поле"
+                                                    : "Имя"
                                         }
-                                        placeholder="Name"
+                                        placeholder="Имя"
                                         error={Boolean(errors?.name)}
                                         variant="outlined"
                                         fullWidth
@@ -141,27 +141,27 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                                         {...register("phone", { required: true, pattern: /^\+?380\d{9}$/ })}
                                         label={
                                             errors?.phone?.type === "pattern"
-                                                ? "Format +380XXXXXXXXX"
+                                                ? "Формат +380XXXXXXXXX"
                                                 : errors?.phone
-                                                    ? "Required field"
-                                                    : "Phone"
+                                                    ? "Обязательное поле"
+                                                    : "Номер телефона"
                                         }
-                                        placeholder="Phone"
+                                        placeholder="Номер телефона"
                                         error={Boolean(errors?.phone)}
                                         variant="outlined"
                                         fullWidth
                                     />
                                 </Stack>
                                 <RadioGroup value={method} onChange={onChangeRadio} sx={{ gap: { sm: 1, md: 1.5 }, mb: { xs: 3, sm: 2 } }}>
-                                    <FormControlLabel value="pickup" control={<Radio />} label="Pickup" />
-                                    <FormControlLabel value="delivery" control={<Radio />} label="Delivery" />
+                                    <FormControlLabel value="pickup" control={<Radio />} label="Самовывоз" />
+                                    <FormControlLabel value="delivery" control={<Radio />} label="Доставка" />
                                 </RadioGroup>
                                 {method === 'delivery' && (
                                     <Stack direction='column' spacing={1}>
                                         <TextField
                                             {...register("adress", { required: true })}
-                                            label={errors?.adress ? "Required field" : "Street, house, apartment"}
-                                            placeholder="Street, house, apartment"
+                                            label={errors?.adress ? "Обязательное поле" : "Адрес"}
+                                            placeholder="Адрес"
                                             error={Boolean(errors?.adress)}
                                             variant="outlined"
                                             fullWidth
@@ -171,14 +171,14 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                                                 {...register("floor", { required: true, min: 1, maxLength: 3 })}
                                                 label={
                                                     errors?.floor?.type === "min"
-                                                        ? "Min 1"
+                                                        ? "Минимум первый"
                                                         : errors?.floor?.type === "maxLength"
-                                                            ? "Max 3 digits"
+                                                            ? "Не больше 3 цифр"
                                                             : errors?.floor
-                                                                ? "Required field"
-                                                                : "Floor"
+                                                                ? "Обязательное поле"
+                                                                : "Этаж"
                                                 }
-                                                placeholder="Floor"
+                                                placeholder="Этаж"
                                                 error={Boolean(errors?.floor)}
                                                 variant="outlined"
                                                 sx={{ flex: 1 }}
@@ -187,14 +187,14 @@ const DeliveryPopup: React.FC<DeliveryPopupProps> = ({ open, onClose, paperSx })
                                                 {...register("flatNum", { required: true, min: 1, maxLength: 4 })}
                                                 label={
                                                     errors?.flatNum?.type === "min"
-                                                        ? "Min 1"
+                                                        ? "Минимум первая"
                                                         : errors?.flatNum?.type === "maxLength"
-                                                            ? "Max 4 digits"
+                                                            ? "Не больше 4 цифр"
                                                             : errors?.flatNum
-                                                                ? "Required field"
-                                                                : "Intercom"
+                                                                ? "Обязательное поле"
+                                                                : "Квартира"
                                                 }
-                                                placeholder="Intercom"
+                                                placeholder="Квартира"
                                                 error={Boolean(errors?.flatNum)}
                                                 variant="outlined"
                                                 sx={{ flex: 1 }}

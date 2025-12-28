@@ -130,7 +130,7 @@ const Basket: React.FC<BasketProps> = ({ openDelivery }) => {
                     </Stack>
                     <Typography
                       variant="subtitle2"
-                      sx={{ cursor: "pointer", color: "#B1B1B1" }}
+                      sx={{ cursor: "pointer", color: "#B1B1B1", display: { xs: "inline-flex", md: "none" } }}
                       onClick={handleClose}
                     >
                       Свернуть

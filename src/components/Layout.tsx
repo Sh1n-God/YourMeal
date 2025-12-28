@@ -59,7 +59,7 @@ const Layout: React.FC = () => {
         sx={{
           position: "relative",
           mt: { xs: 3.75, md: 5 },
-          px: { xs: 1.25, sm: 8, md: 4 },
+          px: { xs: 1.25, sm: 8, md: 4, lg: 9.375 },
           boxSizing: "border-box",
           width: "100vw",
         }}>
