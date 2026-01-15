@@ -1,75 +1,29 @@
-# React + TypeScript + Vite
+# React Shop – Многостраничный проект
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Краткое описание:**  
+Многостраничное React-приложение с адаптивным дизайном, страницами корзины и доставки.  
 
-Currently, two official plugins are available:
+**Технологии:**  
+- React  
+- MUI  
+- Zustand  
+- React Router (Outlet / Layout)  
+- JavaScript, HTML, CSS  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Функционал:**  
+- Адаптивный дизайн под разные устройства  
+- Многостраничная структура с отдельными страницами корзины и доставки    
+- Состояние управления через Zustand  
+- Создание и отображение продуктов  
 
-## React Compiler
+**Скриншоты:**  
+<img width="1024" height="1092" alt="image" src="https://github.com/user-attachments/assets/c2c80e3a-7823-437b-98d3-1394b344f6ab" />
+<img width="1023" height="1087" alt="image" src="https://github.com/user-attachments/assets/9d53281b-89d8-4aba-8556-f70ff5703b2d" />
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Установка и запуск:**  
+```bash
+git clone https://github.com/Sh1n-God/имя_репозитория.git
+cd имя_репозитория
+npm install
+npm start
