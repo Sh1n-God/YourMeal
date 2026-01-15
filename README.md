@@ -7,7 +7,7 @@
 - React  
 - MUI  
 - Zustand  
-- React Router (Outlet / Layout)  
+- React Router  
 - JavaScript, HTML, CSS  
 
 **Функционал:**  
